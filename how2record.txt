@@ -1,0 +1,38 @@
+
+###### PowerShell 設定
+
+## PowerShell 永久允許執行指定目錄下的腳本
+cd E:\playwright\kaizen\
+Get-ChildItem -Recurse -Path . | Unblock-File
+
+## (每次) PowerShell 加入暫時性 PATH（方便在該 PowerShell 視窗中使用）
+$env:PATH = "D:\bin\nodejs;" + $env:PATH
+
+## (每次) 針對這一次的 PowerShell 視窗執行「允許執行任何指令碼」，不改系統安全性
+powershell -ExecutionPolicy Bypass -NoProfile
+
+
+
+
+
+###### 安裝 playwright + 內建browser
+cd E:\playwright\kaizen\
+npm init -y
+npm install -D @playwright/test
+npx playwright install
+
+
+
+
+
+###### 錄製與測試
+
+## 錄製
+cd E:\playwright\kaizen\
+npx playwright codegen https://web2023091801.azurewebsites.net/sso/Login
+
+## 測試腳本
+cd E:\playwright\kaizen\
+npx playwright test
+
+
