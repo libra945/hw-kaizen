@@ -38,9 +38,16 @@ test('test', async ({ page }) => {
   await page.locator('#ddlDateRange').selectOption('Custom');
   await page.getByRole('button', { name: '查詢' }).click();
 
-  
-  // 等待表格資料載入，並驗證資料列筆數是否為 19 筆
-  await page.waitForTimeout(2000); // wait 2 sec. for displaying response rows.
+
+  // 等待資料 API 回應成功
+  await page.waitForResponse(response =>
+  response.url().includes('/Report/SatisfactionPerformance') &&
+  response.status() === 200
+  );
+  // 驗證資料列筆數是否為 19 筆
   const rows = page.locator('#perfTable tbody tr');
-  await expect(rows).toHaveCount(19);
+  await expect(rows).toHaveCount(19, { timeout: 1000 });
+  // 驗證特定輔導單號是否存在
+  const table = page.locator('#perfTable');
+  await expect(table).toContainText('20250407-WISDOM-000001' , { timeout: 1000 });
 });
