@@ -1,7 +1,8 @@
 import { test, expect } from '@playwright/test';
 
 // === 自訂 log 函式 ===
-import { logResult } from '../utils/logger.js'; 
+import { logResult } from '../utils/logger.js';
+logResult('\n' + `===== 測試 Report/SatisfactionPerformance.spec.js =====`);
 
 // === 驗證表格列數量 ===
 async function verifyRowCount(locator, expectedCount) {

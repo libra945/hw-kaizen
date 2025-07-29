@@ -2,6 +2,7 @@ import { test, expect } from '@playwright/test';
 
 // === 自訂 log 函式 ===
 import { logResult } from './utils/logger.js'; 
+logResult('\n' + `===== 測試 Summary.spec.js =====`);
 
 
 // === 驗證特定文字存在於表格 ===
