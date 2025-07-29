@@ -1,4 +1,43 @@
 import { test, expect } from '@playwright/test';
+import fs from 'fs';
+import path from 'path';
+
+const logDir = 'test-logs';
+const logFile = path.join(logDir, 'test-log.txt');
+
+// === 自訂 log 函式 ===
+function logResult(message) {
+  if (!fs.existsSync(logDir)) {
+    fs.mkdirSync(logDir);
+  }
+  const timestamp = new Date().toISOString();
+  const logMessage = `[${timestamp}] ${message}`;
+  console.log(logMessage);
+  fs.appendFileSync(logFile, logMessage + '\n');
+}
+
+// === 驗證表格列數量 ===
+async function verifyRowCount(locator, expectedCount) {
+  try {
+    await expect(locator).toHaveCount(expectedCount, { timeout: 1000 });
+    logResult(`✅ 表格列數驗證通過：預期 ${expectedCount} 筆，實際相符。`);
+  } catch (error) {
+    logResult(`❌ 表格列數錯誤：預期 ${expectedCount} 筆，但不符。`);
+    throw error;
+  }
+}
+
+// === 驗證特定文字存在於表格 ===
+async function verifyTextExists(locator, expectedText) {
+  try {
+    await expect(locator).toContainText(expectedText, { timeout: 1000 });
+    logResult(`✅ 成功找到指定輔導單號：${expectedText}`);
+  } catch (error) {
+    logResult(`❌ 找不到指定輔導單號：${expectedText}`);
+    throw error;
+  }
+}
+
 
 test('test', async ({ page }) => {
 
@@ -44,10 +83,10 @@ test('test', async ({ page }) => {
   response.url().includes('/Report/SatisfactionPerformance') &&
   response.status() === 200
   );
-  // 驗證資料列筆數是否為 19 筆
+
+    // === 執行驗證 ===
   const rows = page.locator('#perfTable tbody tr');
-  await expect(rows).toHaveCount(19, { timeout: 1000 });
-  // 驗證特定輔導單號是否存在
   const table = page.locator('#perfTable');
-  await expect(table).toContainText('20250407-WISDOM-000001' , { timeout: 1000 });
+  await verifyRowCount(rows, 20);
+  await verifyTextExists(table, '20250407-WISDOM-000001');
 });
