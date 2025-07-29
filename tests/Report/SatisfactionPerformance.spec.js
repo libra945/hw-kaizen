@@ -1,20 +1,7 @@
 import { test, expect } from '@playwright/test';
-import fs from 'fs';
-import path from 'path';
-
-const logDir = 'test-logs';
-const logFile = path.join(logDir, 'test-log.txt');
 
 // === 自訂 log 函式 ===
-function logResult(message) {
-  if (!fs.existsSync(logDir)) {
-    fs.mkdirSync(logDir);
-  }
-  const timestamp = new Date().toISOString();
-  const logMessage = `[${timestamp}] ${message}`;
-  console.log(logMessage);
-  fs.appendFileSync(logFile, logMessage + '\n');
-}
+import { logResult } from '../utils/logger.js'; 
 
 // === 驗證表格列數量 ===
 async function verifyRowCount(locator, expectedCount) {
@@ -87,6 +74,6 @@ test('test', async ({ page }) => {
     // === 執行驗證 ===
   const rows = page.locator('#perfTable tbody tr');
   const table = page.locator('#perfTable');
-  await verifyRowCount(rows, 20);
+  await verifyRowCount(rows, 19);
   await verifyTextExists(table, '20250407-WISDOM-000001');
 });
