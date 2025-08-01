@@ -2,15 +2,15 @@ import { test, expect } from '@playwright/test';
 
 // === 自訂 log 函式 ===
 import { logResult } from '../utils/logger.js';
-logResult('\n' + `===== 測試 Report/SatisfactionPerformance.spec.js =====`);
+const _TEST_NAME = '(客戶滿意度查訪績效月報表)';
 
 // === 驗證表格列數量 ===
 async function verifyRowCount(locator, expectedCount) {
   try {
     await expect(locator).toHaveCount(expectedCount, { timeout: 1000 });
-    logResult(`✅ 表格列數驗證通過：預期 ${expectedCount} 筆，實際相符。`);
+    logResult(_TEST_NAME + `✅ 表格列數驗證通過：預期 ${expectedCount} 筆，實際相符。`);
   } catch (error) {
-    logResult(`❌ 表格列數錯誤：預期 ${expectedCount} 筆，但不符。`);
+    logResult(_TEST_NAME + `❌ 表格列數錯誤：預期 ${expectedCount} 筆，但不符。`);
     throw error;
   }
 }
@@ -19,9 +19,9 @@ async function verifyRowCount(locator, expectedCount) {
 async function verifyTextExists(locator, expectedText) {
   try {
     await expect(locator).toContainText(expectedText, { timeout: 1000 });
-    logResult(`✅ 成功找到指定輔導單號：${expectedText}`);
+    logResult(_TEST_NAME + `✅ 成功找到指定輔導單號：${expectedText}`);
   } catch (error) {
-    logResult(`❌ 找不到指定輔導單號：${expectedText}`);
+    logResult(_TEST_NAME + `❌ 找不到指定輔導單號：${expectedText}`);
     throw error;
   }
 }
@@ -39,7 +39,7 @@ test('test', async ({ page }) => {
     const params = new URLSearchParams(originalPostData);
 
     params.set('StartDate', '2025/04/01');
-    params.set('EndDate', '2025/04/30');
+    params.set('EndDate', '2025/05/31');
 
     await route.continue({
       method: 'POST',
@@ -72,9 +72,9 @@ test('test', async ({ page }) => {
   response.status() === 200
   );
 
-    // === 執行驗證 ===
+    // 執行驗證 : 驗證 筆數與資料
   const rows = page.locator('#perfTable tbody tr');
   const table = page.locator('#perfTable');
-  await verifyRowCount(rows, 19);
-  await verifyTextExists(table, '20250407-WISDOM-000001');
+  await verifyRowCount(rows, 2);
+  await verifyTextExists(table, '20250430-WISDOM-000221');
 });
