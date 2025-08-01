@@ -20,9 +20,9 @@ async function verifyRowCount(locator, expectedCount) {
 async function verifyTextExists(locator, expectedText) {
   try {
     await expect(locator).toContainText(expectedText, { timeout: 1000 });
-    logResult(_TEST_NAME + `✅ 成功找到指定輔導單號：${expectedText}`);
+    logResult(_TEST_NAME + `✅ 成功找到指定受輔導者：${expectedText}`);
   } catch (error) {
-    logResult(_TEST_NAME + `❌ 找不到指定輔導單號：${expectedText}`);
+    logResult(_TEST_NAME + `❌ 找不到指定受輔導者：${expectedText}`);
     throw error;
   }
 }
