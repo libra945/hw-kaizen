@@ -2,8 +2,8 @@ import { test, expect } from '@playwright/test';
 
 // === 自訂 log 函式 ===
 import { logResult } from '../utils/logger.js';
-const _TEST_NAME = '(滿意度查訪績效月報)';
-const _TEST_PATH = '/Report/SatisfactionPerformance';
+const _TEST_NAME = '(績效欠佳改善措施月報)';
+const _TEST_PATH = '/Report/SatisfactionImprovement';
 
 // === 驗證表格列數量 ===
 async function verifyRowCount(locator, expectedCount) {
@@ -61,7 +61,7 @@ test('test', async ({ page }) => {
   await page.getByRole('button', { name: '輔導改善平台' }).click();
   await page.getByRole('link', { name: '相關報表' }).hover(); // mouse-move-on showing function list.
   await page.waitForTimeout(200); // wait 0.2 sec. for displaying list
-  await page.getByRole('link', { name: '客戶滿意度查訪績效月報表' }).click();
+  await page.getByRole('link', { name: '客戶滿意度績效欠佳改善措施月報表' }).click();
   // await page.getByLabel('中心').selectOption('23');
   await page.locator('#ddlDateRange').selectOption('Custom');
   await page.getByRole('button', { name: '查詢' }).click();
@@ -76,6 +76,6 @@ test('test', async ({ page }) => {
     // 執行驗證 : 驗證 筆數與資料
   const rows = page.locator('#perfTable tbody tr');
   const table = page.locator('#perfTable');
-  await verifyRowCount(rows, 2);
-  await verifyTextExists(table, '20250430-WISDOM-000221');
+  await verifyRowCount(rows, 1);
+  await verifyTextExists(table, '林琬真');
 });
