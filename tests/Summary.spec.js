@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 // === 自訂 log 函式 ===
 import { logResult } from './utils/logger.js';
 const _TEST_NAME = '(首頁)';
-const _TEST_PATH = '';
+
 
 
 // === 驗證功能選項是否存在 ===
@@ -18,6 +18,7 @@ async function verifyMenuItemVisible(page, locator, description) {
     throw error;
   }
 }
+
 
 
 test('test', async ({ page }) => {
