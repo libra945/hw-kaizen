@@ -73,7 +73,7 @@ test('test', async ({ page }) => {
   response.status() === 200
   );
 
-    // 執行驗證 : 驗證 筆數與資料
+  // 執行驗證 : 驗證 筆數與資料
   const rows = page.locator('#perfTable tbody tr');
   const table = page.locator('#perfTable');
   await verifyRowCount(rows, 1);
