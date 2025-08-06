@@ -27,7 +27,6 @@ test('test', async ({ page }) => {
   await page.waitForTimeout(1000); // 停一停等測試頁渲染完成
 
   // 設定查詢條件
-  // await page.getByLabel('建單日期').waitFor({ state: 'visible' });// 等建單日期下拉選單準備好
   await page.getByLabel('建單日期').selectOption('5');
   await page.locator('#startDate').fill('2025-04-01');
   await page.locator('#endDate').fill('2025-04-21');
