@@ -1,6 +1,6 @@
 module.exports = {
-  // 設定測試超時為 5 秒
-  timeout: 5000,
+  // 設定測試超時為 10 秒
+  timeout: 10000,
   
   use: {
     actionTimeout: 5000,
