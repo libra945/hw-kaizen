@@ -30,9 +30,9 @@ test('test', async ({ page }) => {
   // 等待至少一筆表格資料出現
   await page.waitForSelector('table tbody tr', { state: 'attached' });
 
-  // 驗證筆數
-  const rowLocator = page.locator('table tbody tr');
-  await verifyRowCount(rowLocator, 4);
+  // 驗證資料
+  const trLocator = page.locator('table tbody tr');
+  await verifyRowCount(trLocator, 4);  // 驗證筆數
 
   // const count = await rowLocator.count();
   // logResult(`${_TEST_NAME}✅ 表格列數為 ${count} 筆`);

@@ -53,9 +53,9 @@ test('test', async ({ page }) => {
   response.status() === 200
   );
 
-  // 執行驗證 : 驗證 筆數與資料
-  const rows = page.locator('#perfTable tbody tr');
-  const table = page.locator('#perfTable');
-  await verifyRowCount(rows, 1);
-  await verifyTextExists(table, '林琬真');
+  // 驗證資料
+  const trLocator = page.locator('#perfTable tbody tr');
+  await verifyRowCount(trLocator, 1);  // 驗證筆數
+  await verifyTextExists(trLocator, '林琬真');  // 驗證內容
+
 });

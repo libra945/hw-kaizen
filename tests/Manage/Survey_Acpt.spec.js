@@ -44,5 +44,5 @@ test('test', async ({ page }) => {
   // 驗證資料
   const trLocator = page.locator('table tbody tr');
   await verifyRowCount(trLocator, 1);  // 驗證筆數
-  await verifyTextExists(trLocator, '列入驗收');  // 執行驗證 : 驗證 [列入驗收] 資料
+  await verifyTextExists(trLocator, '列入驗收');  // 驗證內容
 });
