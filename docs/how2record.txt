@@ -41,3 +41,6 @@ npx playwright test
 --project=webkit	強制使用 Safari 核心
 --debug	進入 debug 模式（自動加上 --headed 且暫停每一步）
 --trace=on	開啟追蹤紀錄，可以後續檢視每個步驟
+
+
+npx playwright test Summary.spec.js
