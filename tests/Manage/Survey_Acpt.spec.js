@@ -1,4 +1,5 @@
 import { test } from '@playwright/test';
+import { _GENERAL_WAIT_MS } from '../utils/constants.js';
 import { verifyRowCount, verifyTextExists, verifyTextArrayExists, setDefaultTestName } from '../utils/verifications.js';
 
 
@@ -17,9 +18,8 @@ test('test', async ({ page }) => {
   await page.getByRole('button', { name: '送出' }).click();
   await page.getByRole('button', { name: '輔導改善平台' }).click();
   await page.getByRole('link', { name: '管理作業' }).hover();
-  await page.waitForTimeout(200); // 展開選單
   await page.getByRole('link', { name: '輔導單總覽' }).click();
-  await page.waitForTimeout(1000); // 停一停等測試頁渲染完成
+  await page.waitForTimeout(_GENERAL_WAIT_MS); // 停一停等測試頁渲染完成
 
   // 設定查詢條件
   await page.getByLabel('建單日期').selectOption('5');

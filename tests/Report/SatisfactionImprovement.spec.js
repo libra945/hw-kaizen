@@ -40,7 +40,6 @@ test('test', async ({ page }) => {
   await page.getByRole('button', { name: '送出' }).click();
   await page.getByRole('button', { name: '輔導改善平台' }).click();
   await page.getByRole('link', { name: '相關報表' }).hover(); // mouse-move-on showing function list.
-  await page.waitForTimeout(200); // wait 0.2 sec. for displaying list
   await page.getByRole('link', { name: '客戶滿意度績效欠佳改善措施月報表' }).click();
   // await page.getByLabel('中心').selectOption('23');
   await page.locator('#ddlDateRange').selectOption('Custom');
