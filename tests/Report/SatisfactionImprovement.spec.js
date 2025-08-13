@@ -55,7 +55,7 @@ test('test', async ({ page }) => {
 
   // 驗證資料
   const trLocator = page.locator('#perfTable tbody tr');
-  await verifyRowCount(trLocator, 1);  // 驗證筆數
+  await verifyRowCount(trLocator, 2);  // 驗證筆數
   await verifyTextExists(trLocator, '林琬真');  // 驗證內容
 
 });

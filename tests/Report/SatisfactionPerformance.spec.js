@@ -42,7 +42,7 @@ test('test', async ({ page }) => {
   await page.getByRole('link', { name: '相關報表' }).hover(); // mouse-move-on showing function list.
   await page.waitForTimeout(200); // wait 0.2 sec. for displaying list
   await page.getByRole('link', { name: '客戶滿意度查訪績效月報表' }).click();
-  // await page.getByLabel('中心').selectOption('23');
+  await page.getByLabel('中心').selectOption('23'); // 一客二中心
   await page.locator('#ddlDateRange').selectOption('Custom');
   await page.getByRole('button', { name: '查詢' }).click();
 
@@ -56,7 +56,7 @@ test('test', async ({ page }) => {
 
   // 驗證資料
   const trLocator = page.locator('#perfTable tbody tr');
-  await verifyRowCount(trLocator, 2);  // 驗證筆數
+  await verifyRowCount(trLocator, 5);  // 驗證筆數
   const tableLocator = page.locator('#perfTable');
   await verifyTextExists(tableLocator, '20250430-WISDOM-000221');  // 驗證內容
 });

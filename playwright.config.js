@@ -14,5 +14,6 @@ module.exports = {
   // 其他預設設定
   testDir: './tests',
   fullyParallel: true,
+  workers: 5, 
   // reporter: 'html',
 };
