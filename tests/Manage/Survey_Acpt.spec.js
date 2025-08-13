@@ -1,5 +1,5 @@
 import { test } from '@playwright/test';
-import { verifyRowCount, verifyTextExists, setDefaultTestName } from '../utils/verifications.js';
+import { verifyRowCount, verifyTextExists, verifyTextArrayExists, setDefaultTestName } from '../utils/verifications.js';
 
 
 
@@ -37,9 +37,13 @@ test('test', async ({ page }) => {
   // 等待至少一筆表格資料出現
   await page.waitForSelector('table tbody tr', { state: 'attached' });
 
-  // 驗證表頭 [驗收狀態]
-  ///const thLocator = page.locator('table thead th');
-  ///await verifyTextExists(thLocator, '驗收狀態');
+  // 驗證表頭
+  const thLocator = page.locator('table thead th');
+  const expectedHeaders = [
+    '單號', '類型', '處理方式', '姓名', '員工代號', '輔導者',
+    '進線時間', 'CS1', 'CS2', 'CS3', '改善期限', '目前流程', '驗收狀態'
+  ];
+  await verifyTextArrayExists(thLocator, expectedHeaders);
 
   // 驗證資料
   const trLocator = page.locator('table tbody tr');
